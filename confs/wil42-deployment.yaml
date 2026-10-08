@@ -14,18 +14,6 @@ spec:
     spec:
       containers:
       - name: wil42-playground
-        command: ["/data/scripts/launcher.sh"]
         image: wil42/playground
-        env:
-          - name: APP_NAME
-            value: "wil42-playground"
         ports:
         - containerPort: 8888
-        volumeMounts:
-          - name: config-vol
-            mountPath: /data
-      volumes:
-        - name: config-vol
-          hostPath:
-            path: /data
-            type: Directory
