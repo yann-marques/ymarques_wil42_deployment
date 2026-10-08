@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: wil42-playground
+spec:
+  selector:
+    matchLabels:
+      app: wil42-playground
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: wil42-playground
+    spec:
+      containers:
+      - name: wil42-playground
+        command: ["/data/scripts/launcher.sh"]
+        image: wil42/playground
+        env:
+          - name: APP_NAME
+            value: "wil42-playground"
+        ports:
+        - containerPort: 8888
+        volumeMounts:
+          - name: config-vol
+            mountPath: /data
+      volumes:
+        - name: config-vol
+          hostPath:
+            path: /data
+            type: Directory
